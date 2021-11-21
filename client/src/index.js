@@ -4,14 +4,24 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+//implement redux reducers in the entry point of the application which is the index.js
+//1. import redux
+import {createStore} from 'redux'
+import {Provider} from 'react-redux'
+import {composeWithDevTools} from 'redux-devtools-extension'
+import rootReducer from './reducers';
+
+const store = createStore(rootReducer, composeWithDevTools())
+
+
+//5. provide redux store to the entire application - dispatching actions etc. by wrapping the App component with Provider component from react-redux
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
