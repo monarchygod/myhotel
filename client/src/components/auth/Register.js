@@ -16,7 +16,7 @@ const Register = () => {
         try {
             const res = await axios.post(`http://localhost:8000/api/register`,{
                 name,email,password
-            });
+            },{headers: { 'content-type':'application/json'}});
             console.log('REGISTER USER ===>', res);
         } catch (error) {
             console.log(error.message);

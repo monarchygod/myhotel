@@ -1,7 +1,20 @@
-export const showMessage = async (req,res) => {
-    res.status(200).send(`Here is the message: ${req.params.message}`)
-};
 
-export const register = async (req,res) => {
-    console.log(req.body);
-};
+module.exports = {
+    async register(ctx){
+        try {
+            console.log(ctx.request.body);
+            ctx.type = 'json'
+            ctx.status = 200
+            ctx.body = {
+                success: true
+            }
+        } catch (error) {
+            ctx.type = 'json'
+            ctx.status = error.response.status || 500
+            ctx.body = {
+                success: false,
+                message: error.message
+            }
+        }
+    } 
+}
